@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import { createChart, CandlestickSeries, IChartApi, ISeriesApi, Time } from 'lightweight-charts';
+import { createChart, CandlestickSeries, ColorType, IChartApi, ISeriesApi, Time } from 'lightweight-charts';
 import { VerticalLinePrimitive } from './VerticalLinePlugin';
 
 interface TradingChartProps {
@@ -19,7 +19,7 @@ export default function TradingChart({ data, onAnchorSelect, futureMarkers }: Tr
 
         const chart = createChart(chartContainerRef.current, {
             layout: {
-                background: { type: 'solid', color: '#0f172a' }, // Slate 900
+                background: { type: ColorType.Solid, color: '#0f172a' }, // Slate 900
                 textColor: '#94a3b8', // Slate 400
             },
             grid: {

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TradingChart from '@/components/TradingChart';
-import { Clock, Calculator, Calendar } from 'lucide-react';
+import { Clock, Calculator, Calendar, Menu, X } from 'lucide-react';
 
 const API_BASE = 'http://localhost:8080/api';
 
@@ -10,7 +10,7 @@ export default function Home() {
   const [marketData, setMarketData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [calculating, setCalculating] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   
   const [calculations, setCalculations] = useState<any>(null);
   const [markers, setMarkers] = useState<any[]>([]);
@@ -57,15 +57,20 @@ export default function Home() {
     <div className="flex h-screen bg-slate-900 text-slate-200 font-sans overflow-hidden">
       {/* Main Content */}
       <div className="flex-1 flex flex-col relative">
-        <header className="h-16 border-b border-slate-800 flex items-center px-6 justify-between bg-slate-900/50 backdrop-blur-md z-10">
-          <div className="flex items-center gap-3">
-            <Clock className="text-amber-500 w-6 h-6" />
-            <h1 className="text-lg font-medium tracking-wide">
-              Gann <span className="text-amber-500">Universal Clock</span>
+        <header className="h-16 border-b border-slate-800 flex items-center px-4 md:px-6 justify-between bg-slate-900/50 backdrop-blur-md z-10">
+          <div className="flex items-center gap-2 md:gap-3">
+            <Clock className="text-amber-500 w-5 h-5 md:w-6 md:h-6" />
+            <h1 className="text-base md:text-lg font-medium tracking-wide">
+              Gann <span className="text-amber-500 hidden sm:inline">Universal Clock</span>
             </h1>
           </div>
-          <div className="text-xs text-slate-500 uppercase tracking-widest font-semibold">
-            S&amp;P 500
+          <div className="flex items-center gap-4">
+            <div className="text-[10px] md:text-xs text-slate-500 uppercase tracking-widest font-semibold">
+              S&amp;P 500
+            </div>
+            <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden text-slate-400 hover:text-amber-500 p-1">
+              {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </header>
 
@@ -90,9 +95,9 @@ export default function Home() {
 
       {/* Expandable Sidebar */}
       <div 
-        className={`${sidebarOpen ? 'w-96' : 'w-0'} transition-all duration-300 border-l border-slate-800 bg-slate-900/95 flex flex-col overflow-hidden relative z-20`}
+        className={`${sidebarOpen ? 'translate-x-0 w-full md:w-96' : 'translate-x-full md:translate-x-0 w-full md:w-0'} fixed top-16 bottom-0 right-0 md:static md:top-0 transition-all duration-300 border-l border-slate-800 bg-slate-900/95 flex flex-col overflow-hidden z-30`}
       >
-        <div className="p-6 w-96 flex-shrink-0 flex flex-col h-full overflow-y-auto custom-scrollbar">
+        <div className="p-4 md:p-6 w-full md:w-96 flex-shrink-0 flex flex-col h-full overflow-y-auto custom-scrollbar">
           <div className="flex items-center gap-2 mb-8">
             <Calculator className="w-5 h-5 text-amber-500" />
             <h2 className="text-xl font-medium">Ephemeris Cycle</h2>
