@@ -1,13 +1,13 @@
 import { 
     Coordinate, 
     ISeriesPrimitive, 
-    ISeriesPrimitivePaneRenderer, 
-    ISeriesPrimitivePaneView, 
+    IPrimitivePaneRenderer, 
+    IPrimitivePaneView, 
     SeriesAttachedParameter, 
     Time 
 } from 'lightweight-charts';
 
-class VerticalLineRenderer implements ISeriesPrimitivePaneRenderer {
+class VerticalLineRenderer implements IPrimitivePaneRenderer {
     _x: number | null;
     _color: string;
 
@@ -34,7 +34,7 @@ class VerticalLineRenderer implements ISeriesPrimitivePaneRenderer {
     }
 }
 
-class VerticalLinePaneView implements ISeriesPrimitivePaneView {
+class VerticalLinePaneView implements IPrimitivePaneView {
     _source: VerticalLinePrimitive;
     _x: number | null = null;
 
